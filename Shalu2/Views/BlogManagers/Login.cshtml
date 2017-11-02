@@ -1,0 +1,24 @@
+﻿@using Shalu2.Controllers
+@model IEnumerable<Shalu2.Models.BlogManager>
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Logininput", "BlogManagers"))
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <label for="Name">Username</label>
+        @Html.TextBox("InputId")
+    </p>
+    <p>
+        <label for="Website">Password</label>
+        @Html.TextBox("InputPassword")
+    </p>
+    <p>
+        <input type="submit" value="Log in" />
+    </p>
+}

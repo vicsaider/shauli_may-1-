@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+</head>
+<body>
+    <!--  <audio autoplay>
+           <source src="~/Images/song.mp3" type="audio/mpeg">
+       </audio>-->
+    <!--<header>
+        <h1 id="homeTitle">Ha-Blog Shel Shauli</h1>
+    </header>-->
+    <!-- Introduction -->
+    <section id="intro">
+        <header>
+            <h2>Do you have questions for me?</h2>
+        </header>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>
+        <img src="~/Content/images/intro_shauli.png" alt="Shauli" />
+    </section>
+    <nav>
+        <!-- Navigation -->
+        <ul>
+            <li>@Html.ActionLink("Blog", "Home", "Posts")</li>
+            <li>@Html.ActionLink("Management", "Login", "BlogManagers")</li>
+            <li>@Html.ActionLink("Fan Club", "Index", "Fans")</li>
+            <li><a href="#">Contact Us</a></li>            
+            <li class="subscribe">
+                <a href="#">Subscribe via. RSS<img src="~/Content/images/rss.png" /></a>                
+            </li>
+        </ul>
+    </nav>
+
+  <div>
+      @RenderBody()
+  </div>  
+
+    <footer>
+        <!-- Footer -->
+        <div>
+            <section id="about">
+                <header>
+                    <h3>About</h3>
+                </header>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut la</p>
+            </section>
+            <section id="blogroll">
+                <header>
+                    <h3>Blogroll</h3>
+                </header>
+                <ul>
+                    <li><a href="#">NETTUTS+</a></li>
+                    <li><a href="#">FreelanceSwitch</a></li>
+                </ul>
+            </section>
+            <section id="popular">
+                <header>
+                    <h3>Popular</h3>
+                </header>
+                <ul>
+
+                    <li><a href="#">This is the title of a blog post</a></li>
+                    <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                    <li><a href="#">Consectetur adipisicing elit, sed do eiusmod</a></li>
+                </ul>
+            </section>
+        </div>
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

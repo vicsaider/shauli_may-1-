@@ -1,0 +1,113 @@
+﻿@using Shalu2.Controllers
+@model IEnumerable<Shalu2.Models.Post>
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<!-- filter -->
+<!--
+<form id="filter">
+    Filter Articles:
+    <input type="date" name="bday" placeholder="Date">
+    <input type="authorName" name="name" placeholder="Author Name">
+    <input type="email" name="email" placeholder="Author Email">
+    <input type="text" name="commentText" placeholder="Comment Text">
+    Minimum Comments (1-10):
+    <input type="range" name="minComments" min="0" max="10">
+    <input type="submit" value="Search">
+</form>
+    -->
+<script>
+    $(function () {
+        $(".toggleBtn").click(function (event) {
+            $(event.target).parent(".commentsWrap").find(".comments").toggle();
+        });
+    });
+</script>
+
+<!-- <h1>Blog</h1> -->
+<h1>Blog</h1>
+
+
+<h4>@Html.ActionLink("New Post", "Create", "Posts")</h4>
+<h4>@Html.ActionLink("Blog arcive", "Index", "Posts")</h4>
+
+<div class="bloghome">
+    @foreach (var item in Model)
+    {
+        <!-- add div -->
+        <section>
+            <article class="blogPost">
+                <header>
+                    <h2>@Html.DisplayFor(modelItem => item.Title)</h2> @*displays the item prop*@
+                    <p>
+                        Posted on <time datetime="2009-06-29T23:31+01:00">@Html.DisplayFor(modelItem => item.PublishDate)</time> by <a href="#">@Html.DisplayFor(modelItem => item.AuthorName)</a> - <a href="#comments">@Html.DisplayFor(modelItem => item.Comments.Count) comments</a>
+                    </p>
+                </header>
+                <div>
+                    <p>@Html.DisplayFor(Model => item.Content)</p>
+                    <br />
+                </div>
+                <div>
+                    @if (item.Image != null)
+                {
+                        <img src="@Html.DisplayFor(Model => item.Image)" alt="picture" />
+                    }
+                    <br />
+                    @if (item.Video != null)
+                {
+                        <video controls="controls">
+                            <source src="@Html.DisplayFor(Model => item.Video)" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    }
+                </div>
+            </article>
+        </section>
+        <div id="@Html.DisplayFor(Model => item.Id)" class="commentsWrap">
+            <button class="toggleBtn">#Hide/Show Blog</button>
+            <section class="comments" style="display:none;">
+                <h3>Comments</h3>
+                <article>
+                    @foreach (var comment in item.Comments)
+                {
+                        <article>
+                            <header>
+                                @Html.DisplayFor(Model => comment.CommentWriter)
+                            </header>
+                            <p>@Html.DisplayFor(Model => comment.Content)</p>
+                        </article>
+                    }
+                </article>
+            </section>
+        </div>
+
+
+        using (Html.BeginForm("AddComment", "Posts"))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Post a comment</h3>
+            @Html.Hidden("PostId", item.Id)
+            <p>
+                <label for="Name">Name</label>
+                @Html.TextBox("CommentWriter")
+            </p>
+            <p>
+                <label for="Website">Website</label>
+                @Html.TextBox("CommentWriterSite")
+            </p>
+            <p>
+                <label for="TitleComment">Title</label>
+                @Html.TextBox("Title")
+            </p>
+            <p>
+                <label for="Comment">Comment</label>
+                @Html.TextBox("Content")
+            </p>
+            <p>
+                <input type="submit" value="Post comment" />
+            </p>
+        }
+    }
+</div>
